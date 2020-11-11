@@ -28,6 +28,7 @@
         
         $buscar = $_POST['buscar'];
 
+        // busca el texto ingresado en la tabla de datos persona
         $tablaper="SELECT * FROM persona";
         $resultper=mysqli_query($conectar, $tablaper);
 
@@ -35,11 +36,11 @@
         
         while ($mostrarper=mysqli_fetch_array($resultper)) { 
             if (in_array($buscar, $mostrarper)) {   
-                $perExist = true;
+                $perExist = true; // devuelve true si existe
             }
         }
 
-
+        // busca el texto en la tabla de datos localidad
         $tablaloc="SELECT * FROM localidad";
         $resultloc=mysqli_query($conectar, $tablaloc);
 
@@ -47,12 +48,12 @@
 
         while ($mostrarloc=mysqli_fetch_array($resultloc)) { 
             if (in_array($buscar, $mostrarloc)) {   
-                $locExist = true;
+                $locExist = true; // devuelve true si existe
             }
         }
 
-        if ($perExist == true) { ?>
-            <div class="card centrar">
+        if ($perExist == true) { ?> <!-- si la persona existe procede a crear la tabla -->
+            <div class="card centrar"> <!-- tabla -->
                 <div class="alert alert-success centrar" role="alert">
                         Resultados de Busqueda
                 </div>
@@ -76,7 +77,7 @@
                         <?php
                             $tablaper="SELECT * FROM persona";
                             $resultper=mysqli_query($conectar, $tablaper);
-
+                            // obtiene y coloca los datos coincidentes en la tabla
                             while ($mostrarper=mysqli_fetch_array($resultper)) { 
                                 if (in_array($buscar, $mostrarper)) { 
                                     $dni = $mostrarper['dni'];
@@ -122,7 +123,7 @@
             </div>
         <?php 
         }
-        if ($locExist == true) { ?>
+        if ($locExist == true) { ?> <!-- si la localidad existe procede a crear la tabla -->
             <div class="card centrar">
                 <table class="table table-bordered table-striped ccontenido">
                     <thead>
@@ -134,6 +135,7 @@
                     <tbody>
                         <?php
 
+                            // obtiene y coloca los datos coincidentes en la tabla
                             $tablaloc="SELECT * FROM localidad";
                             $resultloc=mysqli_query($conectar, $tablaloc);
 
@@ -153,7 +155,7 @@
                     </tbody>
                 </table>
             </div>
-        <?php } 
+        <?php } // si ninguno de los valores ingresados existe, muestra un mensaje de error
         if (($perExist == false) && ($locExist) == false) { ?>
             <div class="alert alert-danger centrar" role="alert">
                 El elemento ingresado no existe

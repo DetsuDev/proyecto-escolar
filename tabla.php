@@ -50,7 +50,7 @@
 
                         $tablaloc="SELECT * FROM localidad";
                         $resultloc=mysqli_query($conectar, $tablaloc);
-
+                        // crea la tabla a medida que va obteniendo los datos
                         while ($mostrarper=mysqli_fetch_array($resultper)) { ?>
                             
                             <tr>
@@ -68,7 +68,8 @@
                                 <td> <?php echo $mostrarper['domicilio']; ?> </td>
                                 <td> <?php echo $mostrarper['cp']; ?> </td>
                                 <td> 
-                                <?php 
+                                <?php /* esto el boton de los archivos, mezcla html y php 
+                                para poder mostrar la carpeta coincidente con el dni del alumno, y tambien hay un icono */
                                     echo '<a class="btn btn-secondary" href="archivos/'.$mostrarper['dni'].'/">
                                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-folder" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M9.828 4a3 3 0 0 1-2.12-.879l-.83-.828A1 1 0 0 0 6.173 2H2.5a1 1 0 0 0-1 .981L1.546 4h-1L.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3v1z"/>

@@ -1,5 +1,6 @@
 
-document.getElementById('archDni').onchange = function () {
+// obtiene la ruta de los archivos subidos, y lo transforma de forma de que solo se muestre el nombre de este
+document.getElementById('archDni').onchange = function () { 
   var fileInput = document.getElementById('archDni');   
   var fileName = fileInput.files[0].name;
   document.getElementById('archDniF').innerHTML = fileName;
@@ -34,7 +35,7 @@ document.getElementById('archVac').onchange = function () {
   var fileName = fileInput.files[0].name;
   document.getElementById('archVacF').innerHTML = fileName;
 };
-
+/* esto es parte de la prueba de la confirmacion de los campos 
 document.getElementById('correoConf').onkeyup = function () {
   var correo = document.getElementById('correo').value;
   var correoConf = document.getElementById('correoConf').value;
@@ -57,4 +58,4 @@ document.getElementById('dniConf').onkeyup = function () {
     document.getElementById('dniConf').classList.remove('is-invalid');
     document.getElementById('dniConf').classList.add('is-valid');
   }
-};
+};*/

@@ -36,38 +36,34 @@
 		$localidad=$_POST['localidad'];
 		
 		
-
 		$tablaper="SELECT * FROM persona";
 		$resultper=mysqli_query($conectar, $tablaper);
 		$bool = true;
 
+		// busca en la base de datos si el dni ya esta registrado
 		while ($mostrarper=mysqli_fetch_array($resultper)){
 			if ($mostrarper['dni'] == $dni) { 
-				$bool = false;
+				$bool = false; // si no lo esta, devuelve el valor "falso"
 			}
 		}
 
 		if ($bool == false) { ?>
 			<div class="alert alert-danger centrar" role="alert">
-				Este DNI ya está registrado
+				Este DNI ya está registrado <!-- si lo esta, muestra este mensaje -->
 			</div>
 		<?php } else {
-			
-			//mkdir('archivos/'.$dni.' - '.$nombre.' - '.$apellido,0777,true);
-			//if(move_uploaded_file($tmp_archDni, 'archivos/'.$dni.' - '.$nombre.' - '.$apellido.'/archDni'.'.'.$ext['extension'])) {
-			
-			mkdir('archivos/'.$dni,0777,true);
-			$nom_archDni=$_FILES['archDni']['name'];
-			$tmp_archDni=$_FILES['archDni']['tmp_name'];
-			$ext = pathinfo($nom_archDni);
-
-			if(move_uploaded_file($tmp_archDni, 'archivos/'.$dni.'/archDni'.'.'.$ext['extension'])) { ?>
+			mkdir('archivos/'.$dni,0777,true); // crea una carpeta dentro de "archivos" con el nombre del dni registrado
+			$nom_archDni=$_FILES['archDni']['name']; // archivo final
+			$tmp_archDni=$_FILES['archDni']['tmp_name']; // archivo temporal
+			$ext = pathinfo($nom_archDni); // consigue la extension del archivo
+			// verificamos si hay un archivo cargado, si lo hay, hacemos la conversion del nombre
+			if(move_uploaded_file($tmp_archDni, 'archivos/'.$dni.'/archDni'.'.'.$ext['extension'])) { ?> 
 				<div class="alert alert-success centrar" role="alert">
-					archDni guardado
+					archDni guardado <!-- Estos son mensajes para comprobar si se completo correctamente -->
 				</div>
 			<?php } else { ?>
 				<div class="alert alert-success centrar" role="alert">
-					archDni  guardado
+					archDni no guardado 
 				</div>
 			<?php }
 			
@@ -80,7 +76,7 @@
 				</div>
 			<?php } else { ?>
 				<div class="alert alert-success centrar" role="alert">
-					archAct guardado
+					archAct no guardado 
 				</div>
 			<?php }
 
@@ -93,7 +89,7 @@
 				</div>
 			<?php } else { ?>
 				<div class="alert alert-success centrar" role="alert">
-					archIns guardado
+					archIns no guardado 
 				</div>
 			<?php }
 
@@ -106,7 +102,7 @@
 				</div>
 			<?php } else { ?>
 				<div class="alert alert-success centrar" role="alert">
-					archSexto guardado
+					archSexto no guardado 
 				</div>
 			<?php }
 
@@ -119,7 +115,7 @@
 				</div>
 			<?php } else { ?>
 				<div class="alert alert-success centrar" role="alert">
-					archPan guardado
+					archPan no guardado 
 				</div>
 			<?php }
 
@@ -132,7 +128,7 @@
 				</div>
 			<?php } else { ?>
 				<div class="alert alert-success centrar" role="alert">
-					archVac guardado
+					archVac no guardado 
 				</div>
 			<?php }
 
