@@ -13,7 +13,7 @@
             <img src="logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
             E.E.S.T.N 1
             </a>
-            <a href="index.php" class="btn btn-outline-success" type="button">Volver</a>
+            <a href="index.html" class="btn btn-outline-success" type="button">Volver</a>
         </nav>  
             <div class="card fixed-top ccontenido" style="margin-top: 75">
                 <form class="form-inline ccontenido" method="post" action="buscar.php"> 

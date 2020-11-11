@@ -15,8 +15,8 @@
             </a>
             
             <form class="form-inline my-2 my-lg-0">
-                <a href="index.php">
-                <button class="btn btn-outline-success" type="button" action="index.php">Volver</button>
+                <a href="index.html">
+                <button class="btn btn-outline-success" type="button" action="index.html">Volver</button>
                 </a>
             </form>
         </nav>
