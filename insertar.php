@@ -22,7 +22,7 @@
         </nav>
 	<?php 
 		$captcha = $_POST['g-recaptcha-response'];
-		$secret = '6LfjI-QZAAAAAEySiI20h4u728VQ6o8LUATMq-j1';
+		$secret = 'secret_key';
 		
 		$response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secret&response=$captcha");
 		
