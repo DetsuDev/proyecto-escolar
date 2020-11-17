@@ -5,6 +5,7 @@
 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 		<link rel="stylesheet" href="styles.css">
 		
 	</head>
@@ -89,7 +90,7 @@
 			<div class="form-group"> 
 				<label class="bold" for="correoConf">Confirme la Direccion de Correo *</label>
 				<input type="email" pattern="{0,30}" class="form-control" name="correoConf" id="correoConf" placeholder="Confirme su Correo" required  title="Maximo 60 caracteres">
-			</div> -->
+			</div>sd --> 
 			<div class="row">
 				<div class="form-group col-md-2">
 				<label class="bold" for="celular">Cod. de Area *</label>
@@ -219,6 +220,8 @@
 						<small id="cphelp" class="form-text text-muted">Formato .pdf/.png/.jpg </small>
 				</div>
 			</div>
+			<div class="g-recaptcha" data-sitekey="6LfjI-QZAAAAAE_a_CMTgJqOkaaahpGbKdNIqI2y"></div>
+      	<br/>
 			<button type="submit" class="btn btn-primary" id="button">Confirmar</button>
 		</form>
 	</div>
