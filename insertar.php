@@ -21,143 +21,167 @@
             </form>
         </nav>
 	<?php 
-    	require('conectar.php');
-
-		$dni=$_POST['dni'];
-		$apellido=$_POST['apellido'];
-		$nombre=$_POST['nombre'];
-		$sexo=$_POST['sexo'];
-		$fechanac=$_POST['fechanac'];
-		$codArea=$_POST['codArea'];
-		$telefono=$_POST['telefono'];
-		$correo=$_POST['correo'];
-		$domicilio=$_POST['domicilio'];
-		$cp=$_POST['cp'];
-		$localidad=$_POST['localidad'];
+		$captcha = $_POST['g-recaptcha-response'];
+		$secret = '6LfjI-QZAAAAAEySiI20h4u728VQ6o8LUATMq-j1';
 		
+		$response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secret&response=$captcha");
 		
-		$tablaper="SELECT * FROM persona";
-		$resultper=mysqli_query($conectar, $tablaper);
-		$bool = true;
+		if (!$captcha) { ?>
+			<div class="alert alert-danger centrar" role="alert">
+				Comprueba el Captcha <!-- si lo esta, muestra este mensaje -->
+			</div> <?php
+		} else {
 
-		// busca en la base de datos si el dni ya esta registrado
-		while ($mostrarper=mysqli_fetch_array($resultper)){
-			if ($mostrarper['dni'] == $dni) { 
-				$bool = false; // si no lo esta, devuelve el valor "falso"
+			var_dump($response);
+			$arr = json_decode($response, TRUE);
+			
+			if($arr['success']) { ?>
+				<div class="alert alert-success centrar" role="alert">
+					Captcha comprobado correctamente <!-- si lo esta, muestra este mensaje -->
+				</div> <?php
+				require('conectar.php');
+				$dni=$_POST['dni'];
+				$apellido=$_POST['apellido'];
+				$nombre=$_POST['nombre'];
+				$sexo=$_POST['sexo'];
+				$fechanac=$_POST['fechanac'];
+				$codArea=$_POST['codArea'];
+				$telefono=$_POST['telefono'];
+				$correo=$_POST['correo'];
+				$domicilio=$_POST['domicilio'];
+				$cp=$_POST['cp'];
+				$localidad=$_POST['localidad'];
+				
+				
+				$tablaper="SELECT * FROM persona";
+				$resultper=mysqli_query($conectar, $tablaper);
+				$bool = true;
+		
+				// busca en la base de datos si el dni ya esta registrado
+				while ($mostrarper=mysqli_fetch_array($resultper)){
+					if ($mostrarper['dni'] == $dni) { 
+						$bool = false; // si no lo esta, devuelve el valor "falso"
+					}
+				}
+		
+				if ($bool == false) { ?>
+					<div class="alert alert-danger centrar" role="alert">
+						Este DNI ya está registrado <!-- si lo esta, muestra este mensaje -->
+					</div>
+				<?php } else {
+					mkdir('archivos/'.$dni,0777,true); // crea una carpeta dentro de "archivos" con el nombre del dni registrado
+					$nom_archDni=$_FILES['archDni']['name']; // archivo final
+					$tmp_archDni=$_FILES['archDni']['tmp_name']; // archivo temporal
+					$ext = pathinfo($nom_archDni); // consigue la extension del archivo
+					// verificamos si hay un archivo cargado, si lo hay, hacemos la conversion del nombre
+					if(move_uploaded_file($tmp_archDni, 'archivos/'.$dni.'/archDni'.'.'.$ext['extension'])) { ?> 
+						<div class="alert alert-success centrar" role="alert">
+							archDni guardado <!-- Estos son mensajes para comprobar si se completo correctamente -->
+						</div>
+					<?php } else { ?>
+						<div class="alert alert-success centrar" role="alert">
+							archDni no guardado 
+						</div>
+					<?php }
+					
+					$nom_archAct=$_FILES['archAct']['name'];
+					$tmp_archAct=$_FILES['archAct']['tmp_name'];
+					$ext = pathinfo($nom_archAct);
+					if(move_uploaded_file($tmp_archAct, 'archivos/'.$dni.'/archAct'.'.'.$ext['extension'])) { ?>
+						<div class="alert alert-success centrar" role="alert">
+							archAct guardado
+						</div>
+					<?php } else { ?>
+						<div class="alert alert-success centrar" role="alert">
+							archAct no guardado 
+						</div>
+					<?php }
+		
+					$nom_archIns=$_FILES['archIns']['name'];
+					$tmp_archIns=$_FILES['archIns']['tmp_name'];
+					$ext = pathinfo($nom_archIns);
+					if(move_uploaded_file($tmp_archIns, 'archivos/'.$dni.'/archIns'.'.'.$ext['extension'])) { ?>
+						<div class="alert alert-success centrar" role="alert">
+							archIns guardado
+						</div>
+					<?php } else { ?>
+						<div class="alert alert-success centrar" role="alert">
+							archIns no guardado 
+						</div>
+					<?php }
+		
+					$nom_archSexto=$_FILES['archSexto']['name'];
+					$tmp_archSexto=$_FILES['archSexto']['tmp_name'];
+					$ext = pathinfo($nom_archSexto);
+					if(move_uploaded_file($tmp_archSexto, 'archivos/'.$dni.'/archSexto'.'.'.$ext['extension'])) { ?>
+						<div class="alert alert-success centrar" role="alert">
+							archSexto guardado
+						</div>
+					<?php } else { ?>
+						<div class="alert alert-success centrar" role="alert">
+							archSexto no guardado 
+						</div>
+					<?php }
+		
+					$nom_archPan=$_FILES['archPan']['name'];
+					$tmp_archPan=$_FILES['archPan']['tmp_name'];
+					$ext = pathinfo($nom_archPan);
+					if(move_uploaded_file($tmp_archPan, 'archivos/'.$dni.'/archPan'.'.'.$ext['extension'])) { ?>
+						<div class="alert alert-success centrar" role="alert">
+							archPan guardado
+						</div>
+					<?php } else { ?>
+						<div class="alert alert-success centrar" role="alert">
+							archPan no guardado 
+						</div>
+					<?php }
+		
+					$nom_archVac=$_FILES['archVac']['name'];
+					$tmp_archVac=$_FILES['archVac']['tmp_name'];
+					$ext = pathinfo($nom_archVac);
+					if(move_uploaded_file($tmp_archVac, 'archivos/'.$dni.'/archVac'.'.'.$ext['extension'])) { ?>
+						<div class="alert alert-success centrar" role="alert">
+							archVac guardado
+						</div>
+					<?php } else { ?>
+						<div class="alert alert-success centrar" role="alert">
+							archVac no guardado 
+						</div>
+					<?php }
+		
+					$tablaloc="INSERT INTO localidad(cp, nombreLocalidad) VALUES('$cp','$localidad')";
+					$ejecutarloc=mysqli_query($conectar, $tablaloc);
+					
+					if (!$ejecutarloc) { ?>
+						<div class="alert alert-danger centrar" role="alert">
+							Error en tabla Localidad (Probablemente ya exista)
+						</div>
+					<?php } else { ?>
+						<div class="alert alert-success centrar" role="alert">
+							Guardado en tabla Localidad
+						</div>
+					<?php }
+					
+					$tablaper="INSERT INTO persona(dni, apellido, nombre, sexo, fechaNac, codArea, telefono, correo, fechaEmi, domicilio, cp) VALUES('$dni','$apellido','$nombre','$sexo','$fechanac','$codArea','$telefono','$correo',now(),'$domicilio','$cp')";
+					$ejecutarper=mysqli_query($conectar, $tablaper);
+					
+					if (!$ejecutarper) { ?>
+						<div class="alert alert-danger centrar" role="alert">
+							Error con tabla Persona
+						</div>
+					<?php } else { ?>
+						<div class="alert alert-success centrar" role="alert">
+							Guardado con tabla Persona
+						</div>
+					<?php }
+				}
+			} else { ?>
+				<div class="alert alert-danger centrar" role="alert">
+					Eror al comprobar el Captcha <!-- si lo esta, muestra este mensaje -->
+				</div> <?php
 			}
 		}
-
-		if ($bool == false) { ?>
-			<div class="alert alert-danger centrar" role="alert">
-				Este DNI ya está registrado <!-- si lo esta, muestra este mensaje -->
-			</div>
-		<?php } else {
-			mkdir('archivos/'.$dni,0777,true); // crea una carpeta dentro de "archivos" con el nombre del dni registrado
-			$nom_archDni=$_FILES['archDni']['name']; // archivo final
-			$tmp_archDni=$_FILES['archDni']['tmp_name']; // archivo temporal
-			$ext = pathinfo($nom_archDni); // consigue la extension del archivo
-			// verificamos si hay un archivo cargado, si lo hay, hacemos la conversion del nombre
-			if(move_uploaded_file($tmp_archDni, 'archivos/'.$dni.'/archDni'.'.'.$ext['extension'])) { ?> 
-				<div class="alert alert-success centrar" role="alert">
-					archDni guardado <!-- Estos son mensajes para comprobar si se completo correctamente -->
-				</div>
-			<?php } else { ?>
-				<div class="alert alert-success centrar" role="alert">
-					archDni no guardado 
-				</div>
-			<?php }
-			
-			$nom_archAct=$_FILES['archAct']['name'];
-			$tmp_archAct=$_FILES['archAct']['tmp_name'];
-			$ext = pathinfo($nom_archAct);
-			if(move_uploaded_file($tmp_archAct, 'archivos/'.$dni.'/archAct'.'.'.$ext['extension'])) { ?>
-				<div class="alert alert-success centrar" role="alert">
-					archAct guardado
-				</div>
-			<?php } else { ?>
-				<div class="alert alert-success centrar" role="alert">
-					archAct no guardado 
-				</div>
-			<?php }
-
-			$nom_archIns=$_FILES['archIns']['name'];
-			$tmp_archIns=$_FILES['archIns']['tmp_name'];
-			$ext = pathinfo($nom_archIns);
-			if(move_uploaded_file($tmp_archIns, 'archivos/'.$dni.'/archIns'.'.'.$ext['extension'])) { ?>
-				<div class="alert alert-success centrar" role="alert">
-					archIns guardado
-				</div>
-			<?php } else { ?>
-				<div class="alert alert-success centrar" role="alert">
-					archIns no guardado 
-				</div>
-			<?php }
-
-			$nom_archSexto=$_FILES['archSexto']['name'];
-			$tmp_archSexto=$_FILES['archSexto']['tmp_name'];
-			$ext = pathinfo($nom_archSexto);
-			if(move_uploaded_file($tmp_archSexto, 'archivos/'.$dni.'/archSexto'.'.'.$ext['extension'])) { ?>
-				<div class="alert alert-success centrar" role="alert">
-					archSexto guardado
-				</div>
-			<?php } else { ?>
-				<div class="alert alert-success centrar" role="alert">
-					archSexto no guardado 
-				</div>
-			<?php }
-
-			$nom_archPan=$_FILES['archPan']['name'];
-			$tmp_archPan=$_FILES['archPan']['tmp_name'];
-			$ext = pathinfo($nom_archPan);
-			if(move_uploaded_file($tmp_archPan, 'archivos/'.$dni.'/archPan'.'.'.$ext['extension'])) { ?>
-				<div class="alert alert-success centrar" role="alert">
-					archPan guardado
-				</div>
-			<?php } else { ?>
-				<div class="alert alert-success centrar" role="alert">
-					archPan no guardado 
-				</div>
-			<?php }
-
-			$nom_archVac=$_FILES['archVac']['name'];
-			$tmp_archVac=$_FILES['archVac']['tmp_name'];
-			$ext = pathinfo($nom_archVac);
-			if(move_uploaded_file($tmp_archVac, 'archivos/'.$dni.'/archVac'.'.'.$ext['extension'])) { ?>
-				<div class="alert alert-success centrar" role="alert">
-					archVac guardado
-				</div>
-			<?php } else { ?>
-				<div class="alert alert-success centrar" role="alert">
-					archVac no guardado 
-				</div>
-			<?php }
-
-			$tablaloc="INSERT INTO localidad(cp, nombreLocalidad) VALUES('$cp','$localidad')";
-			$ejecutarloc=mysqli_query($conectar, $tablaloc);
-			
-			if (!$ejecutarloc) { ?>
-				<div class="alert alert-danger centrar" role="alert">
-					Error en tabla Localidad (Probablemente ya exista)
-				</div>
-			<?php } else { ?>
-				<div class="alert alert-success centrar" role="alert">
-					Guardado en tabla Localidad
-				</div>
-			<?php }
-			
-			$tablaper="INSERT INTO persona(dni, apellido, nombre, sexo, fechaNac, codArea, telefono, correo, fechaEmi, domicilio, cp) VALUES('$dni','$apellido','$nombre','$sexo','$fechanac','$codArea','$telefono','$correo',now(),'$domicilio','$cp')";
-			$ejecutarper=mysqli_query($conectar, $tablaper);
-			
-			if (!$ejecutarper) { ?>
-				<div class="alert alert-danger centrar" role="alert">
-					Error con tabla Persona
-				</div>
-			<?php } else { ?>
-				<div class="alert alert-success centrar" role="alert">
-					Guardado con tabla Persona
-				</div>
-			<?php }
-		}
+    	
 
 		?>
 	</body>
