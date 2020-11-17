@@ -1,0 +1,6 @@
+{
+    "success": true,
+    "challenge_ts": "dd-MM-yyyy'T'HH:mm:ssZZ",
+    "hostname": "ttp://localhost/proyectos/index.html",         
+    "error-codes": "invalid-input-response"        
+  }
