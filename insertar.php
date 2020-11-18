@@ -25,7 +25,11 @@
 		$secret = 'secret_key';
 		
 		$response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secret&response=$captcha");
-		
+		?> 
+			<div class="alert alert-warning centrar" role="alert">
+					<?php echo $response ?>
+			</div> 
+		<?php
 		if (!$captcha) { ?>
 			<div class="alert alert-danger centrar" role="alert">
 				Comprueba el Captcha <!-- si lo esta, muestra este mensaje -->
