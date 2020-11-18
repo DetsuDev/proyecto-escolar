@@ -6,9 +6,9 @@
                     No se pudo establecer coneccion con el servidor
                 </div>
             <?php } else { ?>
-                <div class="alert alert-success centrar" role="alert">
+                <!-- <div class="alert alert-success centrar" role="alert">
                     Se conecto
-                </div>
+                </div> -->
             <?php 
             $base=@mysqli_select_db($conectar,'main'); //local
             if(!$base) { ?>
