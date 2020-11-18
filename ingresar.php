@@ -13,11 +13,7 @@
             $secret = 'secret_key';
 
             $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secret&response=$captcha");
-            ?> 
-                <div class="alert alert-warning centrar" role="alert">
-                        <?php echo $response ?>
-                </div> 
-            <?php
+
             if (!$captcha) { ?>
                 <div class="alert alert-alert centrar" role="alert">
                     Comprueba el Captcha 
@@ -26,7 +22,7 @@
 
                 var_dump($response);
                 $arr = json_decode($response, TRUE);
-                
+
                 if($arr['success']) { ?>
                     <div class="alert alert-success centrar" role="alert">
                         Captcha comprobado correctamente
@@ -44,7 +40,6 @@
                             <div class="alert alert-danger centrar" role="alert">
                                 Usuario o contraseña incorrectos
                             </div> <?php
-                            require('login.html');
                         }
                     } 
                 } else { ?>
