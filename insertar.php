@@ -36,7 +36,7 @@
 			$arr = json_decode($response, TRUE);
 			
 			if($arr['success']) { ?>
-				<div class="alert alert-success centrar" role="alert">
+				<div class="alert alert-warning centrar" role="alert">
 					Captcha comprobado correctamente <!-- si lo esta, muestra este mensaje -->
 				</div> <?php
 				require('conectar.php');
