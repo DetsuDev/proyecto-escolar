@@ -35,27 +35,3 @@ document.getElementById('archVac').onchange = function () {
   var fileName = fileInput.files[0].name;
   document.getElementById('archVacF').innerHTML = fileName;
 };
-/* esto es parte de la prueba de la confirmacion de los campos 
-document.getElementById('correoConf').onkeyup = function () {
-  var correo = document.getElementById('correo').value;
-  var correoConf = document.getElementById('correoConf').value;
-  
-  if(correo != correoConf) {
-    document.getElementById('correoConf').classList.add('is-invalid');
-  } else {
-    document.getElementById('correoConf').classList.remove('is-invalid');
-    document.getElementById('correoConf').classList.add('is-valid');
-  }
-};
-
-document.getElementById('dniConf').onkeyup = function () {
-  var dni = document.getElementById('dni').value;
-  var dniConf = document.getElementById('dniConf').value;
-  
-  if(dni != dniConf) {
-    document.getElementById('dniConf').classList.add('is-invalid');
-  } else {
-    document.getElementById('dniConf').classList.remove('is-invalid');
-    document.getElementById('dniConf').classList.add('is-valid');
-  }
-};*/
